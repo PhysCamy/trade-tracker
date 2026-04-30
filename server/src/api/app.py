@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 from src.services.portfolio_service import PortfolioService
@@ -10,6 +11,17 @@ API entry point for the Portfolio Management System.
 """
 app = FastAPI()
 connection_handler = ConnectionHandler(SQLITE_URL)
+
+origins = [
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 # Portfolio CRUD endpoints
 @app.get("/portfolios/{portfolio_id}", response_model = PortfolioResponse)
