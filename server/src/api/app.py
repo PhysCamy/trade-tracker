@@ -13,7 +13,7 @@ app = FastAPI()
 connection_handler = ConnectionHandler(SQLITE_URL)
 
 origins = [
-    "http://localhost:3000"
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
